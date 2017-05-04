@@ -1,9 +1,6 @@
 #include <stdio.h>
-#include<malloc.h>
 #include<stdlib.h>
 #include<math.h>
-//利用螺旋横向和纵向移动的次数比上次少一次的规律
-//将二维数组合并为一维数组来减少复杂度
 int cmp(const void *a,const void *b)
 {
     return *(int*)b-*(int*)a;

@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
-#include<malloc.h>
 struct yb{
-	double num,price,unit;//数量，总价，单价
+	double num,price,unit;
 };
 int cmp(const void *a,const void *b)
 {
@@ -35,6 +34,7 @@ int main()
 			break;
 		}
 	}
+    free(a);
 	printf("%.2lf\n",x);
     return 0;
 }

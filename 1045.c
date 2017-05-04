@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include<malloc.h>
 #include<stdlib.h>
 int cmp(const void *a,const void *b)
 {
@@ -20,7 +19,7 @@ int main()
 	for(i=0;i<n;i++)
 	{
 		if(p[i]>flag) flag=p[i];
-		if(p[i]==p2[i]&&p[i]==flag) p2[num++]=p[i];//主元比右边的都大，且是最终位置
+		if(p[i]==p2[i]&&p[i]==flag) p2[num++]=p[i];
 		
 	}
 	printf("%d\n",num);
@@ -31,5 +30,7 @@ int main()
 		printf("%d",p2[i]);
 	}
 	printf("\n");
+    free(p);
+    free(p2);
     return 0;
 }

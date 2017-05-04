@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include<malloc.h>
 #include<stdlib.h>
 typedef struct team
 {
@@ -20,7 +19,7 @@ int main()
     qsort(t,n,sizeof(t[0]),cmp);
     for(i=0; i<n; i++)
     {
-        if(t[i].id==id) sum+=t[i].score;//id一样的分数相加
+        if(t[i].id==id) sum+=t[i].score;
         else
         {
             if(sum>max)
@@ -38,5 +37,6 @@ int main()
         max=sum;
     }
     printf("%d %d\n",mid,max);
+    free(t);
     return 0;
 }
