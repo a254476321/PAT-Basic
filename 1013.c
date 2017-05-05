@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include<math.h>
+_Bool isPrime(int a)
+{
+    int max=sqrt(a),i;
+    for(i=3; i<=max; i+=2)
+    {
+        if(a%i==0) return 0;
+    }
+    return 1;
+}
 int main()
 {
-	int a,b,sum=1,i,j,flag=1,max;
+	int a,b,sum=1,i;
 	scanf("%d%d",&a,&b);
 	if(a==1){
 		printf("2");
@@ -11,16 +20,7 @@ int main()
 	}
 	for(i=3; sum<b;i+=2)
     {
-        max=sqrt(i);
-        for(j=2; j<=max; j++)
-        {
-            if(i%j==0)
-            {
-                flag=0;
-                break;
-            }
-        }
-        if(flag){
+        if(isPrime(i)){
 			sum++;
 			if(sum>=a){
 				printf("%d",i);
@@ -28,7 +28,6 @@ int main()
 				else printf(" ");
 			}
 		}
-		else flag=1;
     }
 	return 0;
 }
