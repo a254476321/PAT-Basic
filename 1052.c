@@ -9,17 +9,17 @@ int main()
     while((x=getchar())!='\n')
     {
         if(x=='[')
-            scanf("%[^]]",f1[n1++]);
+            scanf("%[^]]]",f1[n1++]);
     }
     while((x=getchar())!='\n')
     {
         if(x=='[')
-            scanf("%[^]]",f2[n2++]);
+            scanf("%[^]]]",f2[n2++]);
     }
     while((x=getchar())!='\n')
     {
         if(x=='[')
-            scanf("%[^]]",f3[n3++]);
+            scanf("%[^]]]",f3[n3++]);
     }
     scanf("%d",&n);
     while(n--)

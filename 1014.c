@@ -33,14 +33,6 @@ int main(){
 		if(a[2][i]==a[3][i]&&(a[2][i]>='A'&&a[2][i]<='Z'||a[3][i]>='a'&&a[3][i]<='z'))
 			break;
 	}
-	if(i>59){
-		i%=60;
-		flag++;
-		if(flag>23){
-			flag%=24;
-			week=week%7+1;
-		}
-	}
 	printf("%s %02d:%02d\n",w[week-1],flag,i);
 	return 0;
 }
