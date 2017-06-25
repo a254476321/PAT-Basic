@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include<malloc.h>
 struct Table{
 	int address,data,next;
 };
@@ -13,12 +12,11 @@ void swap(struct Table *a,struct Table *b)
 int main()
 {
 	int head,n,k,i,j;
-	struct Table *p;
 	scanf("%d%d%d",&head,&n,&k);
-	p=(struct Table*)malloc(n*sizeof(struct Table));
-	for(i=0;i<n;i++)
-		scanf("%d%d%d",&p[i].address,&p[i].data,&p[i].next);
+	struct Table p[n];
 	for(i=0;i<n;i++)//找到头指针
+		scanf("%d%d%d",&p[i].address,&p[i].data,&p[i].next);
+	for(i=0;i<n;i++)
 		if(p[i].address==head){
 			swap(&p[0],&p[i]);
 			break;
@@ -44,15 +42,10 @@ int main()
 			swap(&p[j],&p[i+k-j-1+i]);
 		}
 	}
-	for(j=0;j<i-1;j++)//更新数组
-	{
-		p[j].next=p[j+1].address;
-	}
 	if(j==n-1) p[j].next=-1;
 	else p[j].next=p[j+1].address;
 	for(i=0;i<n-1;i++)
-		printf("%05d %d %05d\n",p[i].address,p[i].data,p[i].next);
-	printf("%05d %d %d\n",p[i].address,p[i].data,p[i].next);
-	free(p);
+		printf("%05d %d %05d\n",p[i].address,p[i].data,p[i+1].address);
+	printf("%05d %d -1\n",p[i].address,p[i].data);
     return 0;
 }

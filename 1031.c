@@ -10,6 +10,11 @@ int main()
 		sum=0;
 		for(j=0;j<17;j++)
 		{
+			if(b[j]=='X')//如果有x字符提前结束
+			{
+				sum=b[17]-'0';
+				break;
+			}
 			if(b[j]!='0') sum+=(b[j]-'0')*d[j];
 		}
 		sum%=11;

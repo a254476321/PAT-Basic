@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include<string.h>
-typedef struct people{
-	char name[6],date[11];
-} People;
 int main()
 {
 	int n,i;
-	char name[6],date[11];
-	People p[2]={{"","2014/09/07"},{"","1814/09/05"}};
+	char name[6],date[11],minname[6],maxname[6];
+	char p[][11]={"2014/09/07","1814/09/05"};
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	{
@@ -18,16 +15,16 @@ int main()
 			i--;
 			continue;
 		}
-		if(strcmp(p[0].date,date)>0){
-			strcpy(p[0].name,name);
-			strcpy(p[0].date,date);
+		if(strcmp(p[0],date)>0){
+			strcpy(maxname,name);
+			strcpy(p[0],date);
 		}
-		if(strcmp(date,p[1].date)>0){
-			strcpy(p[1].name,name);
-			strcpy(p[1].date,date);
+		if(strcmp(date,p[1])>0){
+			strcpy(minname,name);
+			strcpy(p[1],date);
 		}
 	}
-	if(n!=0) printf("%d %s %s\n",n,p[0].name,p[1].name);
+	if(n!=0) printf("%d %s %s\n",n,maxname,minname);
 	else printf("0\n");
     return 0;
 }
