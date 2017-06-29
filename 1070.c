@@ -2,23 +2,21 @@
 #include<stdlib.h>
 int cmp(const void *a,const void *b)
 {
-    return *(int*)b-*(int*)a;
+    return *(int*)a-*(int*)b;
 }
 int main()
 {
-    int n,*p,i;
-    double sum;
+    int n,i,sum;
     scanf("%d",&n);
-    p=(int*)malloc(n*sizeof(int));
+    int p[n];
     for(i=0;i<n;i++)
         scanf("%d",&p[i]);
     qsort(p,n,sizeof(p[0]),cmp);
-    sum=p[n-1];
-    while(--n)
+    sum=p[0];
+    for(i=1;i<n;i++)
     {
-        sum+=p[n-1];
-        sum/=2;
+        sum=(sum+p[i])>>1;
     }
-    printf("%d",(int)sum);
+    printf("%d",sum);
     return 0;
 }
