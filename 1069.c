@@ -1,83 +1,85 @@
 #include<stdio.h>
 #include<string.h>
-#include<malloc.h>
-//利用有序链表加快查找速度
-typedef struct user{
-    char n[21];
-    struct user *next;
-} User;
+/* 利用二分查找算法查重，然后用插入排序方
+便下次查找，利用指针的特性对字符串排序; */
 int main()
 {
-    int n,m,l,i=1,j;
-    char name[21];
-    User *head,*p,*next;
+    int n,m,l,i=1,j,k,low,high,mid;
     scanf("%d%d%d",&n,&l,&m);
-    head=(User*)malloc(sizeof(User));
-    next=(User*)malloc(sizeof(User));
-    head->next=next;
-    next->next=NULL;
+    k=n/l+1;
+    char name[k][21],*pn[k],*p;
+    for(j=0; j<k; j++) //字符串与指针对应
+    {
+        pn[j]=name[j];
+    }
+    k=0;
+    //过滤第m名之前的字符串
     while(i!=m)
     {
         i++;
         scanf("%*s");
-        if(i>n){
+        if(i>n)
+        {
             printf("Keep going...\n");
-            goto loop;
+            return 0;
         }
     }
-    scanf("%s",next->n);
-    puts(next->n);
+    //输出并记录第一个中奖的名字
+    scanf("%s",name[k++]);
+    puts(name[0]);
     i++;
     while(i<=n)
     {
+        //过滤字符串
         j=1;
         while(j!=l)
         {
             i++;
             j++;
             scanf("%*s");
-            if(i>n) goto loop;
+            if(i>n) return 0;
         }
-        p=head;
-        next=p->next;
-        scanf("%s",name);
-        while(next!=NULL)
+loop:
+        scanf("%s",name[k]);
+        //二分查重
+        low=0;
+        high=k-1;
+        while(low<=high)
         {
-            m=strcmp(name,next->n);
-            if(m==0){
-                i++;
-                if(i>n) goto loop;
-                scanf("%s",name);
-                p=head;
-                next=p->next;
-                continue;
+            mid=(low&high)+((low^high)>>1);
+            m=strcmp(pn[mid],pn[k]);
+            if(m>0)
+            {
+                high=mid-1;
             }
-            else if(m<0){
-                next=(User*)malloc(sizeof(User));
-                puts(name);
-                strcpy(next->n,name);
-                next->next=p->next;
-                p->next=next;
+            else if(m<0)
+            {
+                low=mid+1;
+            }
+            else
+            {
                 break;
             }
-            p=next;
-            next=p->next;
         }
-        if(next==NULL){
-            next=(User*)malloc(sizeof(User));
-            puts(name);
-            strcpy(next->n,name);
-            next->next=NULL;
-            p->next=next;
+        //如果相等则输入下一位继续查重，否则记录输出
+        if(m==0)
+        {
+            if(++i>n) break;
+            goto loop;
+        }
+        else
+        {
+            puts(pn[k]);
+            //插入排序
+            while(low<k)
+            {
+                p=pn[k];
+                pn[k]=pn[low];
+                pn[low++]=p;
+            }
+            k++;
         }
         i++;
-    }
-    loop:p=head;
-    while(p!=NULL)
-    {
-        next=p->next;
-        free(p);
-        p=next;
     }
     return 0;
 }
