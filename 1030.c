@@ -1,28 +1,24 @@
 #include <stdio.h>
 #include<stdlib.h>
-int cmp(const void *a,const void *b)
+int cmp(const void *a, const void *b)
 {
-	return *(int*)a-*(int*)b;
+    return *(int*)a - *(int*)b;
 }
 int main()
 {
-	int p,*s,n,i,j,N=0;
-	scanf("%d%d",&n,&p);
-	s=(int*)malloc(n*sizeof(int));
-	for(i=0;i<n;i++)
-	{
-		scanf("%d",&s[i]);
-	}
-	qsort(s,n,sizeof(s[0]),cmp);
-	for(i=0;i+N<n;i++)
-	{
-		for(j=i+N;j<n;j++)
-		{
-			if(1.0*s[j]/p>s[i]) break;
-			else N=j-i+1;
-		} 
-	}
-	free(s);
-	printf("%d\n",N);
-	return 0;
+    int p, n, N = 0, *start, *end;
+    scanf("%d%d", &n, &p);
+    int s[n];
+    end = s + n;
+    for(start = s; start < end; start++)
+    {
+        scanf("%d", start);
+    }
+    qsort(s, n, sizeof(s[0]), cmp);
+    for(start = s; start + N < end; start++)
+    {
+        for(; start + N < end && (float)start[N] / p <= *start; N++);
+    }
+    printf("%d\n", N);
+    return 0;
 }
